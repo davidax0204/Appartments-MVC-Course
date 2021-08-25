@@ -1,12 +1,41 @@
-﻿
+﻿@*@model Appartments_MVC_Course.Models.Stam*@
+@model Appartments_MVC_Course.ViewModels.RealStamViewModel
 @{
     ViewBag.Title = "RealStam";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    var stams = Model.Stams;
+}
+
 <h2>RealStam</h2>
 
 
+@*<p>ID: @Model.Id, Name:@Model.Name, Stam:@Model.IsRealStam</p>*@
+
+@if (stams.Count == 0)
+{
+    <div class="alert-info">There is no stams!</div>
+}
+else
+{
+    <table class="stams-table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Is Real Stam???</th>
+        </tr>
+        @foreach (var stam in stams)
+        {
+            <tr>
+                <td>@stam.Id</td>
+                <td>@stam.Name</td>
+                <td>@stam.IsRealStam</td>
+            </tr>
+        }
+    </table>
+}
 
 
 

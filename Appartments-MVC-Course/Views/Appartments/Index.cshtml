@@ -1,0 +1,31 @@
+﻿@model Appartments_MVC_Course.ViewModels.ApartmentsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var aparatments = @Model.Apartments;
+}
+
+<h2>Aparments</h2>
+
+@if (aparatments.Count == 0)
+{
+    <div class="alert-info">There is no aparmtnets for sale</div>
+}
+else
+{
+<div class="apartments">
+    @foreach (var apartment in aparatments)
+    {
+        <a href="@("/Appartments/details/"+@apartment.Id)">
+            <div class="apartments__card">
+                <img src="@apartment.ImageUrl" />
+                <p>@apartment.City</p>
+            </div>
+        </a>
+    }
+</div>
+}
+

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Appartments_MVC_Course.App_Start;
+using AutoMapper;
+
 
 namespace Appartments_MVC_Course
 {
@@ -12,6 +15,10 @@ namespace Appartments_MVC_Course
     {
         protected void Application_Start()
         {
+            Mapper.Initialize(config=>
+            {
+                config.AddProfile<MappingProfile>();
+            });
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

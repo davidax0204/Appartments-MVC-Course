@@ -9,6 +9,31 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
+
+.apartments {
+    width: 100%;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
+}
+
+.apartments-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background: #87cefa;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.apartments-card img {
+    max-width: 90%;
+}
+
 body {
   margin: 0;
 }
