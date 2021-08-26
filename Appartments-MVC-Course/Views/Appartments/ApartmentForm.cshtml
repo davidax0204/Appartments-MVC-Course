@@ -1,0 +1,36 @@
+﻿@model Appartments_MVC_Course.Dtos.ApartmentDtos
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Apartment</h2>
+@using (Html.BeginForm("Save", "Appartments", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.City)
+        @Html.TextBoxFor(aparment => aparment.City, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.Street)
+        @Html.TextBoxFor(aparment => aparment.Street, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.AparatmentNumber)
+        @Html.TextBoxFor(aparment => aparment.AparatmentNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.Description)
+        @Html.TextBoxFor(aparment => aparment.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.PriceInILS)
+        @Html.TextBoxFor(aparment => aparment.PriceInILS, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(aparment => aparment.ImageUrl)
+        @Html.TextBoxFor(aparment => aparment.ImageUrl, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(aparment => aparment.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

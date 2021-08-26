@@ -1,4 +1,5 @@
 ﻿@model Appartments_MVC_Course.ViewModels.ApartmentsViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,6 +10,15 @@
 }
 
 <h2>Aparments</h2>
+
+@using (Html.BeginForm("", "Appartments", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="city">Search apartments in city</label>
+        <input type="text" placeholder="city" name="city" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+}
 
 @if (aparatments.Count == 0)
 {

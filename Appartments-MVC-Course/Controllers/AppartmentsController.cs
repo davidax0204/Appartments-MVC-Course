@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Security.Principal;
 using System.Web.Mvc;
+using Appartments_MVC_Course.Dtos;
 using Appartments_MVC_Course.Models;
 using Appartments_MVC_Course.ViewModels;
+using AutoMapper;
 
 namespace Appartments_MVC_Course.Controllers
 {
@@ -24,37 +26,91 @@ namespace Appartments_MVC_Course.Controllers
             _context = new ApplicationDbContext();
         }
 
-    // GET: Appartments
-    public ActionResult Index()
-    {
-        var apartements = _context.Apartments.ToList();
-
-        var viewModel = new ApartmentsViewModel()
+        // GET: Appartments
+        public ActionResult Index(string city)
         {
-            Apartments = apartements
-        };
+            List<Apartment> apartements;
+            if (string.IsNullOrEmpty(city))
+            {
+                apartements = _context.Apartments.ToList();
+            }
+            else
+            {
+                city = city.ToLower();
+                apartements = _context.Apartments.Where(apt => apt.City.ToLower().Contains(city)).ToList();
+            }
+            
+            var apartmentsDtos = apartements.Select(Mapper.Map<Apartment, ApartmentDtos>).ToList();
+
+            var viewModel = new ApartmentsViewModel()
+            {
+                Apartments = apartmentsDtos
+            };
 
             return View(viewModel);
         }
 
-    public ActionResult Details(int id)
-    {
-        //if (id >= apartements.Count)
-        //    return HttpNotFound();
-        //var apartment = apartements[id-1];
-
-        var apartment = _context.Apartments.SingleOrDefault(apt => apt.Id == id);
-
-        if (apartment == null)
+        public ActionResult Details(int id)
         {
-            return HttpNotFound();
+            //if (id >= apartements.Count)
+            //    return HttpNotFound();
+            //var apartment = apartements[id-1];
+
+            var apartment = _context.Apartments.SingleOrDefault(apt => apt.Id == id);
+
+            if (apartment == null)
+            {
+                return HttpNotFound();
+            }
+
+            var apartmentDto = Mapper.Map<Apartment, ApartmentDtos>(apartment);
+
+            return View(apartmentDto);
         }
 
-        return View(apartment);
-    }
+        public ActionResult New ()
+        {
+            var apartment = new ApartmentDtos();
 
-        // Appartments/stam/id?sortBy=fuck
-        [Route("apartments/theroute/best/{id:range(1,5)}/{sortBy}")]
+
+            return View("ApartmentForm",apartment);
+        }
+
+        public ActionResult edit(int id)
+        {
+            var apartment = _context.Apartments.SingleOrDefault(apt => apt.Id == id);
+            if (apartment == null)
+            {
+                return HttpNotFound();
+            }
+
+            var apartmentDto = Mapper.Map<Apartment, ApartmentDtos>(apartment);
+
+            return View("ApartmentForm", apartmentDto);
+        }
+
+        public ActionResult Save(ApartmentDtos apartmentDtos)
+        {
+            if (apartmentDtos.Id == 0)
+            {
+                var apartment = Mapper.Map<ApartmentDtos, Apartment>(apartmentDtos);
+                apartment.OwnerId = "David";
+                _context.Apartments.Add(apartment);
+            }
+            else
+            {
+                var apartmentInDb = _context.Apartments.Single(apt => apt.Id == apartmentDtos.Id);
+                Mapper.Map(apartmentDtos, apartmentInDb);
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("", "Appartments");
+        }
+
+
+    // Appartments/stam/id?sortBy=fuck
+    [Route("apartments/theroute/best/{id:range(1,5)}/{sortBy}")]
         public ActionResult stam(int? id, string sortBy)
         {
 

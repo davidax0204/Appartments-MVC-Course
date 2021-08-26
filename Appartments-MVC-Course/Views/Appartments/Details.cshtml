@@ -1,4 +1,5 @@
-﻿@model Appartments_MVC_Course.Models.Apartment
+﻿@*@model Appartments_MVC_Course.Models.Apartment*@
+@model Appartments_MVC_Course.Dtos.ApartmentDtos
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,5 +15,8 @@
 
 <button class="btn btn-info">
     @Html.ActionLink("Back to Appartments", "", "Appartments")
+</button>
+<button class="btn btn-info">
+    @Html.ActionLink("Edit apartment", "edit", "Appartments",new {id=@Model.Id},null)
 </button>
 
