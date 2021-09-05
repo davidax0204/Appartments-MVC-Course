@@ -180,7 +180,9 @@
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ApartmentsController.cs" />
     <Compile Include="Controllers\AppartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -191,6 +193,10 @@
     <Compile Include="Migrations\202108241444131_initial.cs" />
     <Compile Include="Migrations\202108241444131_initial.Designer.cs">
       <DependentUpon>202108241444131_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108271244434_data-anotaions-to-apartment.cs" />
+    <Compile Include="Migrations\202108271244434_data-anotaions-to-apartment.Designer.cs">
+      <DependentUpon>202108271244434_data-anotaions-to-apartment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -286,6 +292,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202108241444131_initial.resx">
       <DependentUpon>202108241444131_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271244434_data-anotaions-to-apartment.resx">
+      <DependentUpon>202108271244434_data-anotaions-to-apartment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

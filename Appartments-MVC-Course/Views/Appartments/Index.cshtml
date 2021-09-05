@@ -30,7 +30,7 @@ else
     @foreach (var apartment in aparatments)
     {
         <a href="@("/Appartments/details/"+@apartment.Id)">
-            <div class="apartments__card">
+            <div class="apartments-card">
                 <img src="@apartment.ImageUrl" />
                 <p>@apartment.City</p>
             </div>

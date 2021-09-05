@@ -88,9 +88,14 @@ namespace Appartments_MVC_Course.Controllers
 
             return View("ApartmentForm", apartmentDto);
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult Save(ApartmentDtos apartmentDtos)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("ApartmentForm", apartmentDtos);
+            }
+
             if (apartmentDtos.Id == 0)
             {
                 var apartment = Mapper.Map<ApartmentDtos, Apartment>(apartmentDtos);

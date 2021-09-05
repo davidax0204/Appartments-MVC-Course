@@ -7,30 +7,43 @@
 <h2>Add Apartment</h2>
 @using (Html.BeginForm("Save", "Appartments", FormMethod.Post))
 {
+    @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.City)
         @Html.TextBoxFor(aparment => aparment.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.City)
     </div>
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.Street)
         @Html.TextBoxFor(aparment => aparment.Street, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.Street)
     </div>
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.AparatmentNumber)
         @Html.TextBoxFor(aparment => aparment.AparatmentNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.AparatmentNumber)
     </div>
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.Description)
         @Html.TextBoxFor(aparment => aparment.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.Description)
     </div>
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.PriceInILS)
         @Html.TextBoxFor(aparment => aparment.PriceInILS, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.PriceInILS)
     </div>
     <div class="form-group">
         @Html.LabelFor(aparment => aparment.ImageUrl)
         @Html.TextBoxFor(aparment => aparment.ImageUrl, new { @class = "form-control" })
+        @Html.ValidationMessageFor(aparment => aparment.ImageUrl)
     </div>
     @Html.HiddenFor(aparment => aparment.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }
