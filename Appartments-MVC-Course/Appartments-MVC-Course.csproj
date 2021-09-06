@@ -217,6 +217,7 @@
     <Compile Include="Models\Stam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ApartmentDetailsViewModel.cs" />
     <Compile Include="ViewModels\ApartmentsViewModel.cs" />
     <Compile Include="ViewModels\RealStamViewModel.cs" />
   </ItemGroup>

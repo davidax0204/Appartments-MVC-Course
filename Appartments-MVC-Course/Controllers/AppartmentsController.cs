@@ -6,6 +6,7 @@ using Appartments_MVC_Course.Dtos;
 using Appartments_MVC_Course.Models;
 using Appartments_MVC_Course.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace Appartments_MVC_Course.Controllers
 {
@@ -55,10 +56,6 @@ namespace Appartments_MVC_Course.Controllers
         //[Authorize]
         public ActionResult Details(int id)
         {
-            //if (id >= apartements.Count)
-            //    return HttpNotFound();
-            //var apartment = apartements[id-1];
-
             var apartment = _context.Apartments.SingleOrDefault(apt => apt.Id == id);
 
             if (apartment == null)
@@ -66,9 +63,19 @@ namespace Appartments_MVC_Course.Controllers
                 return HttpNotFound();
             }
 
+            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var owner = _context.Users.Single(u => u.Id == apartment.OwnerId);
+
             var apartmentDto = Mapper.Map<Apartment, ApartmentDtos>(apartment);
 
-            return View(apartmentDto);
+            var viewModel = new ApartmentDetailsViewModel()
+            {
+                Apartment = apartmentDto,
+                OwnerName = owner.UserName,
+                CanEditApartment = owner.Id==userId
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult New ()
@@ -81,8 +88,9 @@ namespace Appartments_MVC_Course.Controllers
 
         public ActionResult edit(int id)
         {
+            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var apartment = _context.Apartments.SingleOrDefault(apt => apt.Id == id);
-            if (apartment == null)
+            if (apartment == null || userId!=apartment.OwnerId)
             {
                 return HttpNotFound();
             }
@@ -101,8 +109,10 @@ namespace Appartments_MVC_Course.Controllers
 
             if (apartmentDtos.Id == 0)
             {
+                var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 var apartment = Mapper.Map<ApartmentDtos, Apartment>(apartmentDtos);
-                apartment.OwnerId = "David";
+                //apartment.OwnerId = "David";
+                apartment.OwnerId = userId;
                 _context.Apartments.Add(apartment);
             }
             else
