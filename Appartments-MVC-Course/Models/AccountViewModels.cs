@@ -65,9 +65,15 @@ namespace Appartments_MVC_Course.Models
     public class RegisterViewModel
     {
         [Required]
+        public string UserName { get; set; }
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Range(18,100, ErrorMessage = "you must at least 18 years old")]
+        public int Age { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

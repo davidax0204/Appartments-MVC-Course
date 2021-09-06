@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Appartments_MVC_Course.Dtos;
 using Appartments_MVC_Course.Models;
 using AutoMapper;
 
 namespace Appartments_MVC_Course.Controllers.Api
 {
+    [EnableCors(origins:"*",headers:"*",methods:"*")]
     public class ApartmentsController : ApiController
     {
         private ApplicationDbContext _context;

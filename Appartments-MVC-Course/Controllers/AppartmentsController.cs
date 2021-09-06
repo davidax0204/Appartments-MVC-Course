@@ -9,6 +9,7 @@ using AutoMapper;
 
 namespace Appartments_MVC_Course.Controllers
 {
+    //[Authorize]
     public class AppartmentsController : Controller
     {
         //private List<Apartment> apartements = new List<Apartment>
@@ -27,6 +28,7 @@ namespace Appartments_MVC_Course.Controllers
         }
 
         // GET: Appartments
+        [AllowAnonymous]
         public ActionResult Index(string city)
         {
             List<Apartment> apartements;
@@ -50,6 +52,7 @@ namespace Appartments_MVC_Course.Controllers
             return View(viewModel);
         }
 
+        //[Authorize]
         public ActionResult Details(int id)
         {
             //if (id >= apartements.Count)

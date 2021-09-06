@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Appartments_MVC_Course.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
